@@ -18,9 +18,13 @@ for x in followersJson:
 for x in followingJson:
     following.add(x["login"])
 
-result = following.difference(followers)
-if(len(result)==0):
+onlyMe = following.difference(followers)
+onlyThem =  followers.difference(following)
+if(len(onlyMe)==0 and len(onlyThem)==0):
     print("No conflicts.")
-else:
-    for r in result:
+elif len(onlyMe)>0:
+    for r in onlyMe:
+        print(r)
+elif len(onlyThem)>0:
+    for r in onlyThem:
         print(r)
