@@ -22,10 +22,10 @@ onlyThem =  followers.difference(following)
 if(len(onlyMe)==0 and len(onlyThem)==0):
     print("No conflicts.")
 if len(onlyMe)>0:
-    print("I am following them but not followed by:")
+    print("Non-followers that i am following")
     for r in onlyMe:
         print(r)
 if len(onlyThem)>0:
-    print("I don't follow them but they are following me:")
+    print("Followers that i am not following")
     for r in onlyThem:
         print(r)
