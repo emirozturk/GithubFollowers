@@ -1,15 +1,14 @@
 import requests
-import json
 
-pageCount = 3
+pageCount = 5
 followersJson = []
 followingJson = []
+userName = "emirozturk"
+for i in range(1,pageCount+1):
+    followersJson += requests.get(f"https://api.github.com/users/{userName}/followers?per_page=100&page="+str(i)).json()
 
 for i in range(1,pageCount+1):
-    followersJson += requests.get("https://api.github.com/users/emirozturk/followers?per_page=100&page="+str(i)).json()
-
-for i in range(1,pageCount+1):
-    followingJson += requests.get("https://api.github.com/users/emirozturk/following?per_page=100&page="+str(i)).json()
+    followingJson += requests.get(f"https://api.github.com/users/{userName}/following?per_page=100&page="+str(i)).json()
 
 followers=set()
 following=set()
@@ -22,9 +21,11 @@ onlyMe = following.difference(followers)
 onlyThem =  followers.difference(following)
 if(len(onlyMe)==0 and len(onlyThem)==0):
     print("No conflicts.")
-elif len(onlyMe)>0:
+if len(onlyMe)>0:
+    print("I am following them but not followed by:")
     for r in onlyMe:
         print(r)
-elif len(onlyThem)>0:
+if len(onlyThem)>0:
+    print("I don't follow them but they are following me:")
     for r in onlyThem:
         print(r)
